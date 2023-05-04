@@ -37,6 +37,51 @@ const materialO = new THREE.MeshStandardMaterial({color: 0x6495ED, wireframe:fal
 const OuterSphere = new THREE.Mesh(geometryO, materialO,);
 scene.add(OuterSphere);
 
+
+
+const geometryMaker = new THREE.SphereGeometry(0.4, 32, 32);
+const materialMaker = new THREE.MeshStandardMaterial({color: 0xF00AA0});
+const Maker = new THREE.Mesh(geometryMaker, materialMaker);
+Maker.position.set(1, 1, 1);
+scene.add(Maker);
+
+Maker.userData.ignoreRaycast = true;
+
+const raycasterMaker = new THREE.Raycaster();
+const mouseMaker = new THREE.Vector2();
+const objectToFollow = Maker;
+let lastMouseX = 0;
+let lastMouseY = 0;
+
+function onMouseMove(event) {
+  mouseMaker.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouseMaker.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function updateObjectPosition() {
+  if (mouseMaker.x !== lastMouseX || mouseMaker.y !== lastMouseY) {
+    raycasterMaker.setFromCamera(mouseMaker, camera);
+    const intersects = raycasterMaker.intersectObjects(scene.children);
+    if (intersects.length > 0) {
+      const intersectionPoint = intersects[0].point;
+      objectToFollow.position.copy(intersectionPoint);
+    }
+  }
+  lastMouseX = mouseMaker.x;
+  lastMouseY = mouseMaker.y;
+}
+
+window.addEventListener('mousemove', onMouseMove, false);
+
+function animate() {
+  requestAnimationFrame(animate);
+  updateObjectPosition();
+  renderer.render(scene, camera);
+}
+
+animate();
+
+
 OuterSphere.userData.ignoreRaycast = true;
 
 const light = new THREE.DirectionalLight( 0xffffCf, 1.2);
@@ -68,7 +113,7 @@ window.addEventListener('click', event => {
   clickMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
   raycaster.setFromCamera(clickMouse, camera);
-  const found = raycaster.intersectObjects(scene.children.filter(obj => obj !== OuterSphere));
+  const found = raycaster.intersectObjects(scene.children.filter(obj => obj !== OuterSphere && obj !== Maker));
   if (found.length > 0 && (found[0].object).geometry) {
       const mesh = found[0].object
       if (mesh === OuterSphere){
