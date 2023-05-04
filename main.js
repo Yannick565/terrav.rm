@@ -39,8 +39,10 @@ scene.add(OuterSphere);
 
 
 
-const geometryMaker = new THREE.SphereGeometry(0.4, 32, 32);
+const geometryMaker = new THREE.SphereGeometry(0.2, 32, 32);
 const materialMaker = new THREE.MeshStandardMaterial({color: 0xF00AA0});
+materialMaker.opacity = 0.6;
+materialMaker.transparent = true;
 const Maker = new THREE.Mesh(geometryMaker, materialMaker);
 Maker.position.set(1, 1, 1);
 scene.add(Maker);
