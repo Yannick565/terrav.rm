@@ -184,8 +184,26 @@ controls.setObjectToMove(sphere, sphereD);
 controls.disableZoom();
 
 
+let mouseMoved = false;
 
+function MouseActivity() {
+  mouseMoved = true;
+}
 
+window.addEventListener('mousemove', MouseActivity);
+
+function reloadAfterInactivity() {
+  setTimeout(() => {
+    if (!mouseMoved) {
+      location.reload();
+    } else {
+      mouseMoved = false;
+      reloadAfterInactivity();
+    }
+  }, 30000);
+}
+
+reloadAfterInactivity();
 
 //dev tools
 
