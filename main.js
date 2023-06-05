@@ -1,18 +1,10 @@
 import './style.css';
 import * as THREE from 'three';
 import {ObjectControls} from 'threeJS-object-controls';
-//import * as CANNON from 'cannon-es';
-
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({canvas:document.querySelector('.bg')});
-
-/*
-const world = new CANNON.World({
-  gravity: new CANNON.Vec3(0, -9.82, 0), // m/s²
-})
-*/
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -31,13 +23,10 @@ const materialD = new THREE.MeshStandardMaterial({color: 0x2e6930, wireframe:fal
 const sphereD = new THREE.Mesh(geometryD, materialD);
 scene.add(sphereD);
 
-//const globeTexture = new THREE.TextureLoader().load( "./assets/waterTexture.jpg" );
 const geometryO = new THREE.SphereGeometry( 15.1, 400, 400 );
 const materialO = new THREE.MeshStandardMaterial({color: 0x6495ED, wireframe:false} );
 const OuterSphere = new THREE.Mesh(geometryO, materialO,);
 scene.add(OuterSphere);
-
-
 
 const geometryMaker = new THREE.SphereGeometry(0.2, 32, 32);
 const materialMaker = new THREE.MeshStandardMaterial({color: 0xF00AA0});
@@ -83,7 +72,6 @@ function animate() {
 
 animate();
 
-
 OuterSphere.userData.ignoreRaycast = true;
 
 const light = new THREE.DirectionalLight( 0xffffCf, 1.2);
@@ -91,28 +79,38 @@ light.position.set( 10, 10, 30 );
 scene.add( light );
 
 const gridhelper = new THREE.GridHelper(200, 50);
-//scene.add(gridhelper)
-
-/*
-function onDocumentMouseMove(event) {
-  const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-  const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  camera.position.x = mouseX * 20;
-  camera.position.y = mouseY * 20;
-
-  camera.lookAt(scene.position);
-}
-*/
 
 const raycaster = new THREE.Raycaster();
 const clickMouse = new THREE.Vector2();
 const vector3 = new THREE.Vector3();
 const MAX_CLICK_DISTANCE = 2.2
 
-window.addEventListener('click', event => {
-  clickMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  clickMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+function wsConnect() {
+  var ws = new WebSocket("ws://192.168.100.1:1880/ws");
+
+  ws.onmessage = function (msg) {
+     console.log('ws');
+      document.querySelector('canvas').click();
+  }
+
+  ws.onopen = function () {
+      console.log("Connected");
+       
+  }
+
+  ws.onclose = function () {
+    setTimeout(wsConnect, 3000);
+  }
+
+  ws.disconnect = function () {
+      console.log("Disconnected");
+  }
+}
+
+wsConnect();
+
+document.querySelector('canvas').addEventListener('click', event => {
+  console.log('createland')
 
   raycaster.setFromCamera(clickMouse, camera);
   const found = raycaster.intersectObjects(scene.children.filter(obj => obj !== OuterSphere && obj !== Maker));
@@ -150,12 +148,14 @@ window.addEventListener('click', event => {
 
 document.addEventListener('mousemove',(event) => {
   const rotationSpeed = 0.00004 ;
+  
+  clickMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  clickMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   sphere.rotation.y += (event.clientX - window.innerWidth / 2) * rotationSpeed;
   sphere.rotation.x += (event.clientY - window.innerHeight / 2) * rotationSpeed;
   sphereD.rotation.y += (event.clientX - window.innerWidth / 2) * rotationSpeed;
   sphereD.rotation.x += (event.clientY - window.innerHeight / 2) * rotationSpeed;
 });
-
 
 function addStars(){
   const geometry = new THREE.SphereGeometry(0.04, 2, 2);
@@ -183,7 +183,6 @@ controls.enableVerticalRotation();
 controls.setObjectToMove(sphere, sphereD);
 controls.disableZoom();
 
-
 let mouseMoved = false;
 
 function MouseActivity() {
@@ -200,7 +199,7 @@ function reloadAfterInactivity() {
       mouseMoved = false;
       reloadAfterInactivity();
     }
-  }, 30000);
+  }, 60000);
 }
 
 reloadAfterInactivity();
