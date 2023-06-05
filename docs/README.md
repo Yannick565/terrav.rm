@@ -12,14 +12,14 @@ De Aarde is helemaal uitgeput en is niet meer leefbaar, dus zal jij een nieuwe m
 
 ## Benodigdheden
 
-| `items`                             | `software`                 |
-| ----------------------------------- | -------------------------- |
-| Raspberry Pi                        | Node-red                   |
-| Laptop                              | Vite , Three.js , Node-red |
-| Beamer                              | none                       |
-| Bal naar keuze _(omtrek 65 - 67cm)_ | none                       |
-| Bal besturing _(muis, deorollers)_  | Illustrator                |
-| Knop                                | Node-red, Illustrator      |
+| `items`                              | `software`                 |
+| ------------------------------------ | -------------------------- |
+| Raspberry Pi                         | Node-red                   |
+| Laptop                               | Vite , Three.js , Node-red |
+| Beamer                               | none                       |
+| Bal naar keuze _(omtrek 65 - 67cm)_  | none                       |
+| Bal besturing _(muis, 4 deorollers)_ | Illustrator                |
+| Knop                                 | Node-red, Illustrator      |
 
 ## Installs
 
@@ -185,7 +185,7 @@ De planeet bestaat uit **drie verschillende bollen** dat op dezelfde positie sta
 
 De besturing bestaad uit een platform met drie pilaren dat de bal steun geeft. Op het platform staat één deoroller dat het belangrijkste contactpunt is met de bal. De drie andere deorollers staan verbonden met de steunpilaren en zorgen ervoor dat de bal stabiel blijft.
 
-**`techische tekening`**
+**`technische tekening`**
 
 ![besturing](../docs/besturing.png)
 
