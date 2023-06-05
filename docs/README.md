@@ -6,7 +6,7 @@
 
 **`omschrijving `**
 
-De aarde is helemaal uitgeput en is niet meer leefbaar, dus zal jij een nieuwe moeten maken. Maak aan de hand van terravorming een nieuwe leefbare planeet. Vorm de planeet met een interactieve bal-besturing. De software bestaat voornamelijk uit JavaScript dat gebruik maakt van de **Three.js** library.
+De Aarde is helemaal uitgeput en is niet meer leefbaar, dus zal jij een nieuwe moeten maken. Maak aan de hand van terravorming een nieuwe leefbare planeet. Vorm de planeet met een interactieve bal-besturing. De software bestaat voornamelijk uit JavaScript dat gebruik maakt van de **Three.js** library.
 
 > [Three.js](https://threejs.org/)
 
