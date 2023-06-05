@@ -201,4 +201,4 @@ De besturing bestaad uit een platform met drie pilaren dat de bal steun geeft. O
 
 ![video](../docs/thumbnail.png)
 
-> [Video link](https://www.youtube.com/shorts/W_5mbQC3ftI)
+> [Video link](https://www.youtube.com/shorts/M0CMVENACd0)
