@@ -196,3 +196,9 @@ De besturing bestaad uit een platform met drie pilaren dat de bal steun geeft. O
 **`laser cut-out knop`**
 
 ![cut-out](../docs/cutoutKnop.png)
+
+## Video
+
+![video](../docs/thumbnail.png)
+
+> [Video link](https://www.youtube.com/shorts/W_5mbQC3ftI)
