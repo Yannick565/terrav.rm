@@ -10,6 +10,8 @@ De Aarde is helemaal uitgeput en is niet meer leefbaar, dus zal jij een nieuwe m
 
 > [Three.js](https://threejs.org/)
 
+![opstelling](../docs/terravormOpstelling.jpg)
+
 ## Benodigdheden
 
 | `items`                              | `software`                 |
